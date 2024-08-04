@@ -31,8 +31,7 @@ let multipleHighestPlayers = 0
 
 function decide1stPlayer(){
     // Getting the die roll value for the player, storing in array and displaying
-    //const rn = Math.floor(Math.random() * 6) + 1;
-    const rn = 5;
+    const rn = Math.floor(Math.random() * 6) + 1;
     rolls[currentPlayer - 1] = rn;
     diceNum.innerHTML = `Player ${currentPlayer}: ${rn}`
     
@@ -64,7 +63,7 @@ function decide1stPlayer(){
                 }
             }
             const randomIndex = Math.floor(Math.random() * highestPlayers.length);
-            turn.innerHTML = `Highest Player = ${highestPlayers[randomIndex]}. Player ${highestPlayers[randomIndex]} ${playerNames[highestPlayers[randomIndex]-1]} roll the dice to start. There were multiple players with the highest roll and the player to start was chosen randomly from the list of those players`  
+            turn.innerHTML = `Highest Player = ${highestPlayers[randomIndex]}. Player ${highestPlayers[randomIndex]}, ${playerNames[highestPlayers[randomIndex]-1]} roll the dice to start. There were multiple players with the highest roll and the player to start was chosen randomly from the list of those players`  
             currentPlayer = highestPlayers[randomIndex]          
         }
 

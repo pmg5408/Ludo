@@ -4,6 +4,10 @@
 
 This project is a web-based implementation of the classic board game Ludo. The game allows 2 to 4 players to play Ludo with the familiar rules of rolling dice, moving tokens, and reaching the finish line.
 
+### A little history about the game: 
+
+Ludo traces its roots to Pachisi, played during the Mughal era in India. Pachisi involved using cowrie shells as dice and a cloth board adorned with intricate designs. The game symbolized the timeless pursuit of strategy, a trait deeply cherished in Indian gaming traditions.
+
 ## Features
 
 - **Player Count:** Supports 2 to 4 players.

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>LUDO</title>
+        <meta name="description" content="Game Of LUDO">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+    <div class="container">
+        <h1>LUDO</h1>
+        
+        <div class="numPlayers">
+            <label for="dropdown">Select the number of players</label>
+            <select id="dropdown">
+                <option value="2players">2</option>
+                <option value="3players">3</option>
+                <option value="4players">4</option>
+            </select>
+        </div>
+        <div id="playerNames">
+            <!-- Player names will be added dynamically here -->
+        </div>
+    
+        <div>
+            <button id="startButton" disabled>Start Playing</button>
+        </div>
+    </div>
+        <!--<p id="Players">Number of players = 2</p>
+        <a href="Gameboard.html">Start Playing</a>-->
+        <script>
+            const dd = document.getElementById("dropdown");
+            const playerNamesDiv = document.getElementById("playerNames");
+            const startButton = document.getElementById("startButton");
+            
+            // Set the initial number of players to 2
+            localStorage.setItem('numPlayers', 2);
+            
+            // Function to update the player names input fields
+            function updatePlayerNames(numPlayers) {
+                playerNamesDiv.innerHTML = ""; // Clear the div
+                
+                for (let i = 0; i < numPlayers; i++) {
+                    const input = document.createElement("input");
+                    input.type = "text";
+                    input.placeholder = `Enter name for player ${i+1}`;
+                    input.addEventListener("input", function() {
+                        // Store the player names in local storage
+                        const playerNames = [];
+                        const inputs = playerNamesDiv.getElementsByTagName("input");
+                        for (let i = 0; i < inputs.length; i++) {
+                            playerNames.push(inputs[i].value);
+                        }
+                        localStorage.setItem('playerNames', JSON.stringify(playerNames));
+                        
+                        // Enable the start button if all player names are entered
+                        if (playerNames.every(name => name.trim() !== "")) {
+                            startButton.disabled = false;
+                        } else {
+                            startButton.disabled = true;
+                        }
+                    });
+                    playerNamesDiv.appendChild(input);
+                }
+            }
+            
+            // Update the player names input fields when the number of players is changed
+            dd.addEventListener("change", function(){
+                const numPlayers = parseInt(dd.options[dd.selectedIndex].text);
+                localStorage.setItem('numPlayers', numPlayers);
+                updatePlayerNames(numPlayers);
+            });
+            
+            // Initialize the player names input fields with 2 players
+            updatePlayerNames(2);
+            
+            // Start the game when the start button is clicked
+            startButton.addEventListener("click", function() {
+                window.location.href = "Gameboard.html";
+            });
+
+            /*const dd = document.getElementById("dropdown")
+            localStorage.setItem('numPlayers', 2)
+            dd.addEventListener("change", function(){
+                let NumPlayers = dd.options[dd.selectedIndex].text;
+                let np = document.getElementById("Players")
+                np.innerHTML = "Number of players = " + NumPlayers;
+                localStorage.setItem('numPlayers', parseInt(NumPlayers)) 
+            })*/
+
+        </script> 
+    </body>
+</html>

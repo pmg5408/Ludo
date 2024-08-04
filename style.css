@@ -1,0 +1,97 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container
+{
+  text-align: center;
+  display: flex;
+  flex-direction: column;  
+}
+.numPlayers,
+#playerNames
+{
+margin-bottom: 10px;
+}
+#gameboard{
+    width: 750px;
+    height: 750px;
+    background-color: black;
+    display: flex;
+    flex-wrap: wrap;
+    border: solid 1px red;
+}
+
+.square{
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border: solid 2px black;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle{
+  border:solid 2px black;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+#dice{
+  width: 75px;
+  height: 75px;
+  background-color: antiquewhite;
+  border: black;
+  margin-left: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+#diceNumber{
+  align-self: center;
+  font-size: x-large;
+}
+
+
+.triangle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+  
+  .top-left {
+    top: 0;
+    left: 0;
+    border-width: 0 50px 50px 0;
+    border-color: transparent #f00 transparent transparent;
+  }
+  
+  .top-right {
+    top: 0;
+    right: 0;
+    border-width: 0 0 50px 50px;
+    border-color: transparent transparent transparent #0f0;
+  }
+  
+  .bottom-left {
+    bottom: 0;
+    left: 0;
+    border-width: 50px 50px 0 0;
+    border-color: #00f transparent transparent transparent;
+  }
+  
+  .bottom-right {
+    bottom: 0;
+    right: 0;
+    border-width: 50px 0 0 50px;
+    border-color: transparent transparent #ff0 transparent;
+  }

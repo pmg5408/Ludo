@@ -19,31 +19,13 @@ body {
 margin-bottom: 10px;
 }
 
-/*#gameboard{
-    width: 750px;
-    height: 750px;
-    background-color: black;
-    display: flex;
-    flex-wrap: wrap;
-    border: solid 1px red;
-}
-
-#PlayersOnGameboard {
-  position: absolute;
-  top: 120px;
-  left: 1170px;  Adjust the offset to your preference 
-  width: 400px;
-  padding: 10px;
-  box-sizing: border-box;
-} */
-
 #gameboard {
   width: 750px;
   height: 750px;
   background-color: black;
   display: flex;
   flex-wrap: wrap;
-  border: solid 1px red;
+  border: solid 1px black;
   position: relative; /* Added relative positioning */
 }
 

@@ -31,7 +31,8 @@ let multipleHighestPlayers = 0
 
 function decide1stPlayer(){
     // Getting the die roll value for the player, storing in array and displaying
-    const rn = Math.floor(Math.random() * 6) + 1;
+    //const rn = Math.floor(Math.random() * 6) + 1;
+    const rn = 5;
     rolls[currentPlayer - 1] = rn;
     diceNum.innerHTML = `Player ${currentPlayer}: ${rn}`
     
@@ -62,8 +63,9 @@ function decide1stPlayer(){
                     highestPlayers.push(i+1)
                 }
             }
-            const randomIndex = Math.floor(Math.random() * arr.length);
-            turn.innerHTML = `Highest Player = ${highestPlayers[randomIndex]}. Player ${highestPlayers[randomIndex]} ${playerNames[highestPlayers[randomIndex]-1]} roll the dice to start. There were multiple players with the highest roll and the player to start was chosen randomly from the list of those players`            
+            const randomIndex = Math.floor(Math.random() * highestPlayers.length);
+            turn.innerHTML = `Highest Player = ${highestPlayers[randomIndex]}. Player ${highestPlayers[randomIndex]} ${playerNames[highestPlayers[randomIndex]-1]} roll the dice to start. There were multiple players with the highest roll and the player to start was chosen randomly from the list of those players`  
+            currentPlayer = highestPlayers[randomIndex]          
         }
 
         //Making sure the diceNumGenerator function is called now instead of decide!stPlayer, when the dice is pressed from hereon. 
@@ -532,7 +534,12 @@ function diceNumGenerator(){
 
     //If a number other than 6 is rolled
     if(randomNumber != 6){
-        turn.innerHTML = `${playerNames[currentPlayer-1]} move ${randomNumber} spaces`
+        if(tokensAtStart[currentPlayer-1] === 4){
+            turn.innerHTML = ` ${playerNames[currentPlayer-1]} you got a ${randomNumber} but you need a 6 to start the game`
+        }
+        else{
+            turn.innerHTML = ` ${playerNames[currentPlayer-1]} move ${randomNumber} spaces`
+        }
         //turn.innerHTML = "Player " + ((j%np)+1) + " is next. Player " + currentPlayer + " move " + randomNumber + " spaces." + " Current player: " + currentPlayer
         dummyPlayer = currentPlayer
         while(playersWon.includes(((j%np)+1))){
@@ -546,7 +553,7 @@ function diceNumGenerator(){
 
     //Three consecutive sixes are rolled
     else if(sixCount == 3){
-        turn.innerHTML = `${playerNames[currentPlayer-1]} You had 3 sixes in a row. Next player plays`
+        turn.innerHTML = ` ${playerNames[currentPlayer-1]} You had 3 sixes in a row. Next player plays`
         //turn.innerHTML = "Player " + ((j%np)+1) + " is next. Player " + currentPlayer + " had 3 sixes in a row so next player playes " 
         dummyPlayer = currentPlayer
         currentPlayer = ((j%np)+1);
@@ -558,15 +565,15 @@ function diceNumGenerator(){
     //A six is rolled 
     else{
         if(tokensAtStart[currentPlayer-1] === 4){
-            turn.innerHTML = `${playerNames[currentPlayer-1]} select a token to move it to the 1st square and roll the die again`
+            turn.innerHTML = ` ${playerNames[currentPlayer-1]} select a token to move it to the 1st square and roll the die again`
             //turn.innerHTML = "Player " + currentPlayer + " select a token to move it to the 1st square and roll the die again"
         }
         else if(tokensAtStart[currentPlayer-1] === 0){
-            turn.innerHTML = `${playerNames[currentPlayer-1]} move 6 spaces and roll the die again`
+            turn.innerHTML = ` ${playerNames[currentPlayer-1]} move 6 spaces and roll the die again`
             //turn.innerHTML = "Move 6 spaces and player " + currentPlayer + " gets another chance."
         }
         else{
-            turn.innerHTML = `${playerNames[currentPlayer-1]} get a new token or move a token in play`
+            turn.innerHTML = ` ${playerNames[currentPlayer-1]} get a new token or move a token in play`
             //turn.innerHTML = "Player " + currentPlayer + " move a new token to the 1st square or choose another token to move it "
         }
         

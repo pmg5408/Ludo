@@ -27,6 +27,7 @@ let highestRoll = 0
 let highestPlayer = 1
 let highestPlayers = []
 let firstRoll = 0
+let multipleHighestPlayers = 0
 
 function decide1stPlayer(){
     // Getting the die roll value for the player, storing in array and displaying
@@ -34,39 +35,43 @@ function decide1stPlayer(){
     rolls[currentPlayer - 1] = rn;
     diceNum.innerHTML = `Player ${currentPlayer}: ${rn}`
     
+
+    if(rn === highestRoll){
+        multipleHighestPlayers = 1
+    }
     // If die value is higher than prev highest, making necessary changes. 
-    if(rn >= highestRoll){
+    if(rn > highestRoll){
+        multipleHighestPlayers = 0    //Changing value to reflect that only a single player holds the highest value currently
         highestRoll = rn
         highestPlayer = currentPlayer
         turn.innerHTML = ` Player with highest yet: ${playerNames[highestPlayer-1]}`
     }
     currentPlayer++
-    /*if(currentPlayer === np){
-        for(let i = 0; i < np; i++){
-            if(highestRoll === rolls[i] && highestPlayer !== i+1){
-                highestPlayers.push(i+1)
-            }
-        }
-    }*/
+    console.log(currentPlayer, " ", np+1)
+    //Logic for when al the players have rolled the dice once in the first round and now it's time to decide the player that will start the game.
     if(currentPlayer === np+1){
-        for(let i = 0; i < np; i++){
-            if(highestRoll === rolls[i]){
-                highestPlayers.push(i+1)
-            }
-        }
-        if(highestPlayers.length > 1){
-            currentPlayer = highestPlayer
-            dice.removeEventListener("click", decide1stPlayer)
-            dice.addEventListener("click", diceNumGenerator)
-            firstRoll = 1
-        }
-        else{
+
+        if (multipleHighestPlayers === 0){
             currentPlayer = highestPlayer
             turn.innerHTML = `Highest Player = ${highestPlayer}. Player ${highestPlayer} ${playerNames[highestPlayer-1]} roll the dice to start`
-            dice.removeEventListener("click", decide1stPlayer)
-            dice.addEventListener("click", diceNumGenerator)
-            firstRoll = 1
         }
+        //If multiple players with highest roll, we will put all the players in an array and then ranodmly select a player to start
+        else{
+            for(let i = 0; i < np; i++){
+                if(highestRoll === rolls[i]){
+                    highestPlayers.push(i+1)
+                }
+            }
+            const randomIndex = Math.floor(Math.random() * arr.length);
+            turn.innerHTML = `Highest Player = ${highestPlayers[randomIndex]}. Player ${highestPlayers[randomIndex]} ${playerNames[highestPlayers[randomIndex]-1]} roll the dice to start. There were multiple players with the highest roll and the player to start was chosen randomly from the list of those players`            
+        }
+
+        //Making sure the diceNumGenerator function is called now instead of decide!stPlayer, when the dice is pressed from hereon. 
+        dice.removeEventListener("click", decide1stPlayer)
+        dice.addEventListener("click", diceNumGenerator)
+        firstRoll = 1
+        boardInfo = document.querySelector('#PlayersOnGameboard');
+        boardInfo.removeChild(boardInfo.lastChild);    
     }
 }
 
@@ -96,6 +101,7 @@ const safeSquares = [36, 122, 102, 188, 133, 91, 23, 201]
 let tokensAtStart = [4, 4, 4, 4]
 let tokensFinished = [0, 0, 0, 0]
 let playersWon = []
+const colors = ['Blue', 'Yellow', 'Green', 'Red']
 
 
 const gameBoard = document.querySelector("#gameboard");
@@ -151,7 +157,19 @@ function createBoard(){
             }
         }
 
-})
+    })
+
+    //Displaying names and colors of players
+    playerOnGameboard = document.querySelector("#PlayersOnGameboard")
+
+    for(let i = 0; i < np; i++){
+        const name = document.createElement("p");
+        name.innerHTML = `Player ${i+1} is ${playerNames[i]} and Color is ${colors[i]}`;
+        playerOnGameboard.appendChild(name);
+    }
+    const info = document.createElement("p");
+    info.innerHTML = `This is the 1st round. The die values in this round will be used to decide the player to go 1st`
+    playerOnGameboard.appendChild(info)
 }
 createBoard();
 

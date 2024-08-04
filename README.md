@@ -15,8 +15,19 @@ This project is a web-based implementation of the classic board game Ludo. The g
 
 ## Demo
 
-![Demo GIF 1](path/to/demo1.gif)
-![Demo GIF 2](path/to/demo2.gif)
+Here are some GIFs showcasing the functionality of the game.
+
+### Home page and Player Selection
+![Home page and Player Selection](GIFs/PlayerSelection_HomeScreen.gif)
+
+### Round to decide the player to go 1st
+![Round to decide the player to go 1st](GIFs/Round1.gif)
+
+### Game Start - Players need a 6 to release a token from the Home Base
+![Game Start - Players need a 6 to release a token from the Home Base](GIFs/GameStart.gif)
+
+### Token Movement and Token Elimination
+![Token Movement and Token Elimination](GIFs/FurtherGameplay.gif)
 
 ## Tech Stack
 
